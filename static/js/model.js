@@ -199,7 +199,7 @@ export const newErshoufangModel = {
         title: {
             type: 'select',
             required: true,
-            width:'140px',
+            width: '140px',
             value: '',
             placeholder: '性别',
             rules: [{required: true, message: '性别'}],
@@ -451,22 +451,6 @@ export const newErshoufangModel = {
                 }
             ]
         },
-        decoration: {
-            label: '装修',
-            type: 'select',
-            rules: [{required: true, message: '请选择装修类型'}],
-            value: '',
-            options: [
-                {
-                    label: '精装修',
-                    value: '精装修'
-                },
-                {
-                    label: '简装',
-                    value: '简装'
-                }
-            ]
-        },
         lastDecoration: {
             label: '上次装修',
             value: '',
@@ -501,7 +485,7 @@ export const newErshoufangModel = {
             rules: [{required: true, message: '请输入房龄'}],
             value: '',
         },
-        buildingAge:{
+        buildingAge: {
             label: '建筑年代',
             type: 'input',
             rules: [{required: true, message: '请输入建筑年代'}],
@@ -525,8 +509,8 @@ export const newErshoufangModel = {
         sole: {
             label: '是否唯一',
             type: 'select',
-            rules:[{required: true, message: '请选择是否唯一'}],
-            options:[
+            rules: [{required: true, message: '请选择是否唯一'}],
+            options: [
                 {
                     label: '唯一住房',
                     value: '唯一住房'
@@ -579,16 +563,16 @@ export const newErshoufangModel = {
                 }
             ]
         },
-        mentality:{
+        mentality: {
             label: '业主心态',
             type: 'input',
-            rules:[{required: true, message: '请输入业主心态'}],
+            rules: [{required: true, message: '请输入业主心态'}],
             value: ''
         },
         remark: {
             label: '备注',
             type: 'input',
-            rules:[{required: true, message: '请输入业主备注'}],
+            rules: [{required: true, message: '请输入业主备注'}],
             value: ''
         },
         school: {
@@ -663,7 +647,7 @@ export const newErshoufangModel = {
 }
 
 export const newClientModel = {
-    firstStepInfo:{
+    firstStepInfo: {
         shared: {
             label: '公有/私有',
             value: '',
@@ -848,5 +832,482 @@ export const newClientModel = {
                 }]
             }]
         },
+    },
+    attachInfo: {
+        minTotalPrice: {
+            label: '最低总价',
+            type: 'input',
+            value: '',
+            rules: [{required: true, message: '最低总价'}]
+        },
+        maxTotalPrice: {
+            label: '最高总价',
+            type: 'input',
+            value: '',
+            rules: [{required: true, message: '最高总价'}]
+        },
+        minArea: {
+            label: '最小面积',
+            type: 'input',
+            value: '',
+            rules: [{required: true, message: '最低总价'}]
+        },
+        maxArea: {
+            label: '最大面积',
+            type: 'input',
+            value: '',
+            rules: [{required: true, message: '最高总价'}]
+        },
+        decoration: {
+            label: '装修',
+            type: 'select',
+            value: '',
+            rules: [{required: true, message: '请选择装修'}],
+            options: [
+                {
+                    label: '毛坯',
+                    value: '毛坯'
+                },
+                {
+                    label: '简装',
+                    value: '简装'
+                },
+                {
+                    label: '豪装',
+                    value: '豪装'
+                },
+                {
+                    label: '精装',
+                    value: '精装'
+                },
+                {
+                    label: '清水',
+                    value: '清水'
+                },
+                {
+                    label: '准新房',
+                    value: '准新房'
+                },
+                {
+                    label: '中装',
+                    value: '中装'
+                },
+                {
+                    label: '不限',
+                    value: '不限'
+                }
+            ]
+        },
+        purpose: {
+            label: '用途',
+            type: 'select',
+            value: '',
+            rules: [{required: true, message: '请选择用途'}],
+            options: [
+                {
+                    label: '住宅',
+                    value: '住宅'
+                },
+                {
+                    label: '公寓',
+                    value: '公寓'
+                },
+                {
+                    label: '写字楼',
+                    value: '写字楼'
+                },
+                {
+                    label: '商铺',
+                    value: '商铺'
+                },
+                {
+                    label: '别墅',
+                    value: '别墅'
+                },
+                {
+                    label: '厂房',
+                    value: '厂房'
+                },
+                {
+                    label: '仓库',
+                    value: '仓库'
+                },
+                {
+                    label: '不限',
+                    value: '不限'
+                },
+            ]
+        },
+        roomType: {
+            label: '户型',
+            type: 'multi',
+            required: true,
+            value: {
+                room: '',
+                hall: '',
+            },
+            children: [
+                {
+                    type: 'input',
+                    placeholder: '室',
+                    unit: '室',
+                    rules: [{required: true, message: '请输入室数'}],
+                    model: 'room',
+                    width: '25%'
+                },
+                {
+                    type: 'input',
+                    placeholder: '厅',
+                    unit: '厅',
+                    model: 'hall',
+                    width: '25%'
+                }
+            ],
+        },
+        payWay: {
+            label: '付款方式',
+            type: 'select',
+            value: '',
+            rules: [{required: true, message: '付款方式'}],
+            options: [
+                {
+                    label: '全款',
+                    value: '全款'
+                },
+                {
+                    label: '贷款',
+                    value: '贷款'
+                },
+            ]
+        }
+    }
+}
+
+export const newClientRentModel = {
+    firstStepInfo: {
+        shared: {
+            label: '公有/私有',
+            value: '',
+            type: 'select',
+            rules: [{required: true, message: '请选择公私有'}],
+            options: [
+                {
+                    label: '公有',
+                    value: '公有'
+                },
+                {
+                    label: '私有',
+                    value: '私有'
+                }
+            ]
+        },
+        /*owner: {
+            label: '姓名',
+            type: 'input',
+            width: '100px',
+            value: '',
+            rules: [{required: true, message: '业主姓名'}]
+        },
+        title: {
+            type: 'select',
+            width:'140px',
+            value: '',
+            placeholder: '性别',
+            rules: [{required: true, message: '性别'}],
+            options: [
+                {
+                    label: '先生',
+                    value: '男'
+                },
+                {
+                    label: '女士',
+                    value: '女'
+                }
+            ]
+        },
+        phone: {
+            label: '联系方式',
+            placeholder: '手机号',
+            type: 'input',
+            width: '160px',
+            value: '',
+            rules: [{required: true, message: '请输入手机号'}, {}]
+        },
+        relation: {
+            type: 'select',
+            value: '',
+            width: '80px',
+            rules: [{required: true, message: '关系'}],
+            options: [
+                {
+                    label: '配偶',
+                    value: '配偶'
+                },
+                {
+                    label: '亲戚',
+                    value: '亲戚'
+                },
+                {
+                    label: '朋友',
+                    value: '朋友'
+                },
+                {
+                    label: '授权委托人',
+                    value: '授权委托人'
+                }
+            ]
+        }*/
+    },
+    baseInfo: {
+        clientType: {
+            label: '客源类型',
+            type: 'select',
+            value: '二手房',
+            rules: [{required: true, message: '类型'}],
+            options: [
+                {
+                    label: '二手房',
+                    value: '二手房'
+                },
+                {
+                    label: '租房',
+                    value: '租房'
+                },
+                {
+                    label: '新房',
+                    value: '新房'
+                },
+                {
+                    label: '新房/二手房',
+                    value: '新房/二手房'
+                }
+            ]
+        },
+        source: {
+            label: '客户来源',
+            type: 'select',
+            value: '上门客户',
+            rules: [{required: true, message: '来源'}],
+            options: [
+                {
+                    label: '上门客户',
+                    value: '上门客户'
+                },
+                {
+                    label: '房邻平台来电',
+                    value: '房邻平台来电'
+                },
+                {
+                    label: '贴条',
+                    value: '贴条'
+                },
+                {
+                    label: '朋友介绍',
+                    value: '朋友介绍'
+                },
+                {
+                    label: '其它平台来电',
+                    value: '其它平台来电'
+                },
+                {
+                    label: '其它',
+                    value: '其它'
+                }
+            ]
+        },
+        account: {
+            label: '户口信息',
+            type: 'select',
+            value: '本地',
+            rules: [{required: true, message: '户口'}],
+            options: [
+                {
+                    label: '本地',
+                    value: '本地'
+                },
+                {
+                    label: '外地',
+                    value: '外地'
+                }
+            ]
+        },
+        needAddressDtos: {
+            label: '需求位置',
+            type: 'cascader',
+            width: '240px',
+            value: [],
+            rules: [{required: true, message: '请选择需求位置'}],
+            options: [{
+                value: 'zhinan',
+                label: '指南',
+                children: [{
+                    value: 'shejiyuanze',
+                    label: '设计原则',
+                    children: [{
+                        value: 'yizhi',
+                        label: '一致'
+                    }, {
+                        value: 'fankui',
+                        label: '反馈'
+                    }, {
+                        value: 'xiaolv',
+                        label: '效率'
+                    }, {
+                        value: 'kekong',
+                        label: '可控'
+                    }]
+                }, {
+                    value: 'daohang',
+                    label: '导航',
+                    children: [{
+                        value: 'cexiangdaohang',
+                        label: '侧向导航'
+                    }, {
+                        value: 'dingbudaohang',
+                        label: '顶部导航'
+                    }]
+                }]
+            }]
+        },
+    },
+    attachInfo: {
+        minMonth: {
+            label: '最小月租金',
+            type: 'input',
+            value: '',
+            rules: [{required: true, message: '最小月租金'}]
+        },
+        maxMonth: {
+            label: '最大月租金',
+            type: 'input',
+            value: '',
+            rules: [{required: true, message: '最大月租金'}]
+        },
+        minArea: {
+            label: '最小面积',
+            type: 'input',
+            value: '',
+            rules: [{required: true, message: '最低总价'}]
+        },
+        maxArea: {
+            label: '最大面积',
+            type: 'input',
+            value: '',
+            rules: [{required: true, message: '最高总价'}]
+        },
+        decoration: {
+            label: '装修',
+            type: 'select',
+            value: '',
+            rules: [{required: true, message: '请选择装修'}],
+            options: [
+                {
+                    label: '毛坯',
+                    value: '毛坯'
+                },
+                {
+                    label: '简装',
+                    value: '简装'
+                },
+                {
+                    label: '豪装',
+                    value: '豪装'
+                },
+                {
+                    label: '精装',
+                    value: '精装'
+                },
+                {
+                    label: '清水',
+                    value: '清水'
+                },
+                {
+                    label: '准新房',
+                    value: '准新房'
+                },
+                {
+                    label: '中装',
+                    value: '中装'
+                },
+                {
+                    label: '不限',
+                    value: '不限'
+                }
+            ]
+        },
+        purpose: {
+            label: '用途',
+            type: 'select',
+            value: '',
+            rules: [{required: true, message: '请选择用途'}],
+            options: [
+                {
+                    label: '住宅',
+                    value: '住宅'
+                },
+                {
+                    label: '公寓',
+                    value: '公寓'
+                },
+                {
+                    label: '写字楼',
+                    value: '写字楼'
+                },
+                {
+                    label: '商铺',
+                    value: '商铺'
+                },
+                {
+                    label: '别墅',
+                    value: '别墅'
+                },
+                {
+                    label: '厂房',
+                    value: '厂房'
+                },
+                {
+                    label: '仓库',
+                    value: '仓库'
+                },
+                {
+                    label: '不限',
+                    value: '不限'
+                },
+            ]
+        },
+        roomType: {
+            label: '户型',
+            type: 'multi',
+            required: true,
+            value: {
+                room: '',
+                hall: '',
+            },
+            children: [
+                {
+                    type: 'input',
+                    placeholder: '室',
+                    unit: '室',
+                    rules: [{required: true, message: '请输入室数'}],
+                    model: 'room',
+                    width: '25%'
+                },
+                {
+                    type: 'input',
+                    placeholder: '厅',
+                    unit: '厅',
+                    model: 'hall',
+                    width: '25%'
+                }
+            ],
+        }
+    }
+}
+
+export const searchClientModel = {
+    ranges: {
+        label: '单价区间',
+        minTotalPrice: 100,
+        maxTotalPrice: 1000,
     }
 }

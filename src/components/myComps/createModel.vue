@@ -180,6 +180,36 @@
                                             </el-option>
                                         </el-select>
                                     </template>
+                                    <template v-else-if="item.type == 'multi'">
+                                        <template v-for="(child,i) in item.children">
+                                            <template v-if="child.type == 'input'">
+                                                <el-input
+                                                    :key="i"
+                                                    :style="{'width': child.width || 'auto'}"
+                                                    v-model="item.value[child.model]"
+                                                    :placeholder="child.placeholder">
+                                                    <template v-if="item.unit" slot="append">{{item.unit}}
+                                                    </template>
+                                                    <template v-else-if="child.unit" slot="append">{{child.unit}}
+                                                    </template>
+                                                </el-input>
+                                            </template>
+                                            <template v-else-if="child.type=='select'">
+                                                <el-select
+                                                    :style="{'width': child.width || 'auto'}"
+                                                    clearable
+                                                    size="mini"
+                                                    v-model="item.value[child.model]">
+                                                    <el-option
+                                                        v-for="option in child.options"
+                                                        :key="option.value"
+                                                        :label="option.label"
+                                                        :value="option.value">
+                                                    </el-option>
+                                                </el-select>
+                                            </template>
+                                        </template>
+                                    </template>
                                 </el-form-item>
                             </el-col>
                         </el-row>

@@ -4,7 +4,7 @@
             <el-col :span="18">
                 <query-status @checkStatus="handleCheckStatus" :status="statusSelection"></query-status>
             </el-col>
-            <el-button style="float: right;" type="danger" @click="$refs.createNewEsf.showFirst()">
+            <el-button style="float: right;" type="danger" @click="chooseClientType">
                 新增客源
             </el-button>
         </el-row>
@@ -63,6 +63,24 @@
                 </el-checkbox>
             </span>
         </div>
+        <el-row :gutter="10">
+            <el-col :span="3">
+                <range-picker
+                    :min="100"
+                    :max="800"
+                    unit="元"
+                    placeholder="单价区间">
+                </range-picker>
+            </el-col>
+            <el-col :span="3">
+                <range-picker
+                    :min="20"
+                    :max="100"
+                    unit="万元"
+                    placeholder="总价区间">
+                </range-picker>
+            </el-col>
+        </el-row>
         <el-table
             ref="esfTable"
             :data="esfData"
@@ -130,7 +148,10 @@
         </el-table>
 
         <create-model
+            v-if="newClientModel"
             ref="createNewEsf"
+            :outerTitle="outerTitle"
+            :innerTitle="innerTitle"
             :createModel.sync="newClientModel"
             @doCreate="createNewEsf">
         </create-model>
@@ -142,20 +163,23 @@
     import QueryStatus from 'myComps/queryStatus'
     import SubjectQuery from 'myComps/subjectQuery'
     import CreateModel from 'myComps/createModel'
+    import RangePicker from 'myComps/rangePicker'
     import {
         saleTotalRange,
         areaRange,
         unitRange,
         purposRange,
         rightNature,
-        floor,newClientModel
+        floor, newClientModel, newClientRentModel
     } from 'static/js/model'
 
     export default {
         name: "ershoufang",
-        components: {QueryStatus, SubjectQuery, CreateModel},
+        components: {QueryStatus, SubjectQuery, CreateModel, RangePicker},
         data() {
             return {
+                outerTitle: '',
+                innerTitle: '',
                 esfData: [],
                 selectedRows: [],
                 statusSelection: [
@@ -235,7 +259,7 @@
                         label: '出租'
                     }
                 ],
-                newClientModel: newClientModel
+                newClientModel: null,
             }
         },
         filters: {
@@ -298,8 +322,29 @@
             queryArea(areaId) {
                 this.queryModel.areaId = areaId;
             },
-            createNewEsf(data){
+            createNewEsf(data) {
                 console.log(data);
+            },
+            chooseClientType() {
+                this.$confirm('请选择客源类型', '提示', {
+                    confirmButtonText: '买房',
+                    cancelButtonText: '租房',
+                    type: 'success'
+                }).then(() => {
+                    this.outerTitle = '买房客源';
+                    this.innerTitle = '买房客源详情';
+                    this.newClientModel = newClientModel;
+                    this.$nextTick(() => {
+                        this.$refs.createNewEsf.showFirst();
+                    })
+                }).catch(() => {
+                    this.outerTitle = '租房客源';
+                    this.innerTitle = '租房客源详情';
+                    this.newClientModel = newClientRentModel;
+                    this.$nextTick(() => {
+                        this.$refs.createNewEsf.showFirst();
+                    })
+                });
             }
         },
         computed: {
