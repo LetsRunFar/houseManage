@@ -183,9 +183,9 @@
         white-space: nowrap;
         position: relative;
         z-index: 10;
-        line-height: 24px;
-        height: 24px;
-        padding: 0 34px 0 5px;
+        line-height: 30px;
+        height: 30px;
+        padding: 0 34px 0 10px;
         background-color: #fff;
         border: solid 1px #ebeef5;
         font-size: 15px;
@@ -208,7 +208,7 @@
             right: 5px;
             top: 50%;
             font-size: 14px;
-            margin-top: -12px;
+            margin-top: -14px;
             color: #606266;
         }
         .placeholder {
@@ -219,14 +219,13 @@
             width: 150%;
             position: absolute;
             min-width: 150px;
-            top: 25px;
+            top: 31px;
             left: -1px;
             background-color: #fff;
             border: solid 1px #d4d4d4;
             /deep/ .inputs {
                 padding: 10px;
                 .el-input {
-                    height: 24px;
                     line-height: 24px;
                 }
                 .el-input__inner {

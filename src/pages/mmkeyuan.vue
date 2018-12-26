@@ -64,21 +64,34 @@
             </span>
         </div>
         <el-row :gutter="10">
-            <el-col :span="3">
-                <range-picker
-                    :min="100"
-                    :max="800"
-                    unit="元"
-                    placeholder="单价区间">
-                </range-picker>
-            </el-col>
-            <el-col :span="3">
-                <range-picker
-                    :min="20"
-                    :max="100"
-                    unit="万元"
-                    placeholder="总价区间">
-                </range-picker>
+            <el-col class="search-item" v-for="(range, index) in searchClientModel" :key="index" :span="3">
+                <template v-if="range.type == 'range'">
+                    <range-picker
+                        :value.sync="range.value"
+                        :min="range.min"
+                        :max="range.max"
+                        :unit="range.unit"
+                        :gap="range.gap"
+                        :placeholder="range.label">
+                    </range-picker>
+                </template>
+                <template v-else-if="range.type == 'input'">
+                    <el-input v-model="range.value" :placeholder="range.label"></el-input>
+                </template>
+                <template v-else-if="range.type=='select'">
+                    <el-select
+                        :placeholder="range.label"
+                        clearable
+                        size="mini"
+                        v-model="range.value">
+                        <el-option
+                            v-for="option in range.options"
+                            :key="option.value"
+                            :label="option.label"
+                            :value="option.value">
+                        </el-option>
+                    </el-select>
+                </template>
             </el-col>
         </el-row>
         <el-table
@@ -170,7 +183,7 @@
         unitRange,
         purposRange,
         rightNature,
-        floor, newClientModel, newClientRentModel
+        floor, newClientModel, newClientRentModel, searchClientModel
     } from 'static/js/model'
 
     export default {
@@ -260,6 +273,7 @@
                     }
                 ],
                 newClientModel: null,
+                searchClientModel: searchClientModel,
             }
         },
         filters: {
@@ -430,6 +444,15 @@
             content: attr(name);
             left: 10px;
             font-weight: 600;
+        }
+    }
+    .search-item {
+        margin-top: 5px;
+        height: 32px;
+        line-height: 32px;
+        /deep/.el-input__inner{
+            height: 32px;
+            line-height: 32px;
         }
     }
 </style>

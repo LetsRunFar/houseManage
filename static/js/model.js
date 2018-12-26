@@ -1305,9 +1305,189 @@ export const newClientRentModel = {
 }
 
 export const searchClientModel = {
-    ranges: {
-        label: '单价区间',
-        minTotalPrice: 100,
-        maxTotalPrice: 1000,
+    clientType:{
+        label: '客源类型',
+        type: 'select',
+        value:'',
+        options:[
+            {
+                label: '买房',
+                value: '买房'
+            },
+            {
+                label: '租房',
+                value: '租房'
+            },
+            {
+                label: '买房/租房',
+                value: '买房/租房'
+            },
+        ]
+    },
+    price:{
+        type: 'range',
+        label: '总价区间',
+        min: 100,
+        max: 2000,
+        gap: 100,
+        unit: '万元',
+        value:''
+    },
+    area: {
+        type: 'range',
+        label: '面积区间',
+        min: 10,
+        max: 500,
+        gap: 30,
+        unit: '平',
+        value:''
+    },
+    rent: {
+        type: 'range',
+        label: '租金区间',
+        min: 300,
+        max: 6000,
+        gap: 500,
+        unit: '元',
+        value:''
+    },
+    needAddressDtos:{
+        type:'input',
+        label: '片区id',
+        value: ''
+    },
+    decoration: {
+        label: '装修',
+        type: 'select',
+        value: '',
+        options: [
+            {
+                label: '毛坯',
+                value: '毛坯'
+            },
+            {
+                label: '简装',
+                value: '简装'
+            },
+            {
+                label: '豪装',
+                value: '豪装'
+            },
+            {
+                label: '精装',
+                value: '精装'
+            },
+            {
+                label: '清水',
+                value: '清水'
+            },
+            {
+                label: '准新房',
+                value: '准新房'
+            },
+            {
+                label: '中装',
+                value: '中装'
+            },
+            {
+                label: '不限',
+                value: '不限'
+            }
+        ]
+    },
+    purpose: {
+        label: '用途',
+        type: 'select',
+        value: '',
+        options: [
+            {
+                label: '住宅',
+                value: '住宅'
+            },
+            {
+                label: '公寓',
+                value: '公寓'
+            },
+            {
+                label: '写字楼',
+                value: '写字楼'
+            },
+            {
+                label: '商铺',
+                value: '商铺'
+            },
+            {
+                label: '别墅',
+                value: '别墅'
+            },
+            {
+                label: '厂房',
+                value: '厂房'
+            },
+            {
+                label: '仓库',
+                value: '仓库'
+            },
+            {
+                label: '不限',
+                value: '不限'
+            },
+        ]
+    },
+    myClient:{
+        label: '我的客源',
+        type: 'select',
+        value: '',
+        options: [
+            {
+                label: '住宅',
+                value: '住宅'
+            },
+            {
+                label: '我的收藏',
+                value: '我的收藏'
+            },
+            {
+                label: '我的录入',
+                value: '我的录入'
+            },
+            {
+                label: '我的责任人',
+                value: '我的责任人'
+            },
+            {
+                label: '我的看过的',
+                value: '我的看过的'
+            },
+            {
+                label: '我的成交',
+                value: '我的成交'
+            },
+        ]
+    },
+    unit: {
+        label: '室数',
+        value:'',
+        type: 'input'
+    },
+    hall:{
+        label: '厅数',
+        value: '',
+        type: 'input'
+    },
+    depts:{
+        label: '部门id',
+        type: 'input',
+        value:''
+    },
+    emps: {
+        label: '员工id',
+        type: 'input',
+        value: ''
+    },
+    like: {
+        label: '模糊查询条件',
+        type: 'input',
+        value: ''
     }
 }
