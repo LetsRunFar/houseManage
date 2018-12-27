@@ -1,14 +1,42 @@
 <template>
     <div class="main">
-        <el-row>
-            <el-col :span="18">
-                <query-status @checkStatus="handleCheckStatus" :status="statusSelection"></query-status>
+        <el-row style="margin-bottom: 5px;" :gutter="10">
+            <el-col class="search-item" v-for="(item, index) in searchEsfModel" :key="index" :span="3">
+                <template v-if="item.type == 'range'">
+                    <range-picker
+                        :value.sync="item.value"
+                        :min="item.min"
+                        :max="item.max"
+                        :unit="item.unit"
+                        :gap="item.gap"
+                        :placeholder="item.label">
+                    </range-picker>
+                </template>
+                <template v-else-if="item.type == 'input'">
+                    <el-input v-model="item.value" :placeholder="item.label"></el-input>
+                </template>
+                <template v-else-if="item.type=='select'">
+                    <el-select
+                        :placeholder="item.label"
+                        clearable
+                        size="mini"
+                        v-model="item.value">
+                        <el-option
+                            v-for="option in item.options"
+                            :key="option.value"
+                            :label="option.label"
+                            :value="option.value">
+                        </el-option>
+                    </el-select>
+                </template>
             </el-col>
-            <el-button style="float: right;" type="danger" @click="$refs.createNewEsf.showFirst()">
+        </el-row>
+        <el-row>
+            <el-button type="danger" @click="$refs.createNewEsf.showFirst()">
                 新增房源
             </el-button>
         </el-row>
-        <div class="area-select" name="位置">
+        <!--<div class="area-select" name="位置">
             <div class="regions">
                 <span @click="queryRegion(region.id)"
                       :class="{'region':true,'active': queryModel.regionId == region.id}"
@@ -62,7 +90,8 @@
                     {{floor.text}}
                 </el-checkbox>
             </span>
-        </div>
+        </div>-->
+
         <el-table
             ref="esfTable"
             :data="esfData"
@@ -141,18 +170,19 @@
     import QueryStatus from 'myComps/queryStatus'
     import SubjectQuery from 'myComps/subjectQuery'
     import CreateModel from 'myComps/createModel'
+    import RangePicker from 'myComps/rangePicker'
     import {
         saleTotalRange,
         areaRange,
         unitRange,
         purposRange,
         rightNature,
-        floor, newErshoufangModel,
+        floor, newErshoufangModel, searchEsfModel
     } from 'static/js/model'
 
     export default {
         name: "ershoufang",
-        components: {QueryStatus, SubjectQuery, CreateModel},
+        components: {QueryStatus, SubjectQuery, CreateModel, RangePicker},
         data() {
             return {
                 esfData: [],
@@ -235,6 +265,7 @@
                     }
                 ],
                 newErshoufangModel: newErshoufangModel,
+                searchEsfModel: searchEsfModel,
             }
         },
         filters: {
@@ -259,6 +290,12 @@
                 deep: true
             },
             newErshoufangData: {
+                handler(val) {
+                    console.log(val);
+                },
+                deep: true
+            },
+            newSearchEsfData: {
                 handler(val){
                     console.log(val);
                 },
@@ -367,6 +404,24 @@
                     },
                     tags: []
                 }
+            },
+            newSearchEsfData(){
+                return {
+                    status: this.searchEsfModel.status.value,
+                    locked: this.searchEsfModel.locked.value,
+                    decoration: this.searchEsfModel.decoration.value,
+                    purpose: this.searchEsfModel.purpose.value,
+                    unit: this.searchEsfModel.unit.value,
+                    hall: this.searchEsfModel.hall.value,
+                    chinaAreaA: this.searchEsfModel.chinaAreaA.value,
+                    divideId: this.searchEsfModel.divideId.value,
+                    area: this.searchEsfModel.area.value,
+                    saleTotal: this.searchEsfModel.saleTotal.value,
+                    created: this.searchEsfModel.created.value,
+                    floor: this.searchEsfModel.floor.value,
+                    rightNature: this.searchEsfModel.rightNature.value,
+                    myEsf: this.searchEsfModel.myEsf.value,
+                }
             }
         }
     }
@@ -446,6 +501,15 @@
             content: attr(name);
             left: 10px;
             font-weight: 600;
+        }
+    }
+    .search-item {
+        margin-top: 5px;
+        height: 32px;
+        line-height: 32px;
+        /deep/.el-input__inner{
+            height: 32px;
+            line-height: 32px;
         }
     }
 </style>

@@ -1305,11 +1305,11 @@ export const newClientRentModel = {
 }
 
 export const searchClientModel = {
-    clientType:{
+    clientType: {
         label: '客源类型',
         type: 'select',
-        value:'',
-        options:[
+        value: '',
+        options: [
             {
                 label: '买房',
                 value: '买房'
@@ -1324,14 +1324,14 @@ export const searchClientModel = {
             },
         ]
     },
-    price:{
+    price: {
         type: 'range',
         label: '总价区间',
-        min: 100,
+        min: 50,
         max: 2000,
-        gap: 100,
+        gap: 10,
         unit: '万元',
-        value:''
+        value: ''
     },
     area: {
         type: 'range',
@@ -1340,7 +1340,7 @@ export const searchClientModel = {
         max: 500,
         gap: 30,
         unit: '平',
-        value:''
+        value: ''
     },
     rent: {
         type: 'range',
@@ -1349,10 +1349,10 @@ export const searchClientModel = {
         max: 6000,
         gap: 500,
         unit: '元',
-        value:''
+        value: ''
     },
-    needAddressDtos:{
-        type:'input',
+    needAddressDtos: {
+        type: 'input',
         label: '片区id',
         value: ''
     },
@@ -1434,7 +1434,7 @@ export const searchClientModel = {
             },
         ]
     },
-    myClient:{
+    myClient: {
         label: '我的客源',
         type: 'select',
         value: '',
@@ -1467,18 +1467,18 @@ export const searchClientModel = {
     },
     unit: {
         label: '室数',
-        value:'',
+        value: '',
         type: 'input'
     },
-    hall:{
+    hall: {
         label: '厅数',
         value: '',
         type: 'input'
     },
-    depts:{
+    depts: {
         label: '部门id',
         type: 'input',
-        value:''
+        value: ''
     },
     emps: {
         label: '员工id',
@@ -1489,5 +1489,196 @@ export const searchClientModel = {
         label: '模糊查询条件',
         type: 'input',
         value: ''
+    }
+}
+
+export const searchEsfModel = {
+    status: {
+        label: '状态',
+        value: '',
+        type: 'select',
+        options: [
+            {
+                label: '状态1',
+                value: '状态1'
+            },
+            {
+                label: '状态2',
+                value: '状态2'
+            }
+        ]
+    },
+    locked: {
+        label: '是否封盘',
+        value: '',
+        type: 'select',
+        options: [
+            {
+                label: '未封盘',
+                value: false
+            },
+            {
+                label: '封盘',
+                value: true
+            }
+        ]
+    },
+    decoration: {
+        label: '装修',
+        type: 'select',
+        value: '',
+        options: [
+            {
+                label: '毛坯',
+                value: '毛坯'
+            },
+            {
+                label: '简装',
+                value: '简装'
+            },
+            {
+                label: '豪装',
+                value: '豪装'
+            },
+            {
+                label: '精装',
+                value: '精装'
+            },
+            {
+                label: '清水',
+                value: '清水'
+            },
+            {
+                label: '准新房',
+                value: '准新房'
+            },
+            {
+                label: '中装',
+                value: '中装'
+            },
+            {
+                label: '不限',
+                value: '不限'
+            }
+        ]
+    },
+    purpose: {
+        label: '用途',
+        type: 'select',
+        value: '',
+        options: [
+            {
+                label: '住宅',
+                value: '住宅'
+            },
+            {
+                label: '公寓',
+                value: '公寓'
+            },
+            {
+                label: '写字楼',
+                value: '写字楼'
+            },
+            {
+                label: '商铺',
+                value: '商铺'
+            },
+            {
+                label: '别墅',
+                value: '别墅'
+            },
+            {
+                label: '厂房',
+                value: '厂房'
+            },
+            {
+                label: '仓库',
+                value: '仓库'
+            },
+            {
+                label: '不限',
+                value: '不限'
+            },
+        ]
+    },
+    unit: {
+        label: '室数',
+        value: '',
+        type: 'input',
+    },
+    hall: {
+        label: '厅数',
+        value: '',
+        type: 'input'
+    },
+    chinaAreaA: {
+        label: '区域id',
+        value: '',
+        type: 'input',
+    },
+    divideId: {
+        label: '片区id',
+        value: '',
+        type: 'input',
+    },
+    area: {
+        type: 'range',
+        label: '面积区间',
+        min: 10,
+        max: 500,
+        gap: 30,
+        unit: '平',
+        value: ''
+    },
+    saleTotal: {
+        type: 'range',
+        label: '总价区间',
+        min: 50,
+        max: 2000,
+        gap: 10,
+        unit: '万元',
+        value: ''
+    },
+    created: {
+        type: 'input',
+        label: '多少日内的房源',
+        value: ''
+    },
+    floor: {
+        label: '楼层',
+        type: 'input',
+        value: ''
+    },
+    rightNature: {
+        label: '产权',
+        value: '',
+        type: 'input'
+    },
+    myEsf: {
+        label: '我的房源',
+        value: '',
+        type: 'select',
+        options: [
+            {
+                label: '我的收藏',
+                value: '我的收藏'
+            },
+            {
+                label: '我的录入',
+                value: '我的录入'
+            },
+            {
+                label: '我的责任人',
+                value: '我的责任人'
+            },
+            {
+                label: '我的看过的',
+                value: '我的看过的'
+            },
+            {
+                label: '我的成交',
+                value: '我的成交'
+            }
+        ]
     }
 }

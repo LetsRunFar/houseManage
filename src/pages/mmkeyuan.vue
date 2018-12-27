@@ -1,69 +1,6 @@
 <template>
     <div class="main">
-        <el-row>
-            <el-col :span="18">
-                <query-status @checkStatus="handleCheckStatus" :status="statusSelection"></query-status>
-            </el-col>
-            <el-button style="float: right;" type="danger" @click="chooseClientType">
-                新增客源
-            </el-button>
-        </el-row>
-        <div class="area-select" name="位置">
-            <div class="regions">
-                <span @click="queryRegion(region.id)"
-                      :class="{'region':true,'active': queryModel.regionId == region.id}"
-                      v-for="(region,index) in regions" :key="index">
-                    {{region.name}}
-                </span>
-            </div>
-            <div class="areas" v-if="areas">
-                <span @click="queryArea(area.id)" :class="{'area':true,'active':queryModel.areaId == area.id}"
-                      v-for="(area,index) in areas" :key="index">{{area.name}}</span>
-            </div>
-        </div>
-        <div class="checkbox-select" name="售价">
-            <span class="checkbox-wrap" v-for="(total,index) in queryModel.saleTotalRange" :key="index">
-                <el-checkbox v-model="total.checked">
-                    {{total.text}}
-                </el-checkbox>
-            </span>
-        </div>
-        <div class="checkbox-select" name="面积">
-            <span class="checkbox-wrap" v-for="(area,index) in queryModel.areaRange" :key="index">
-                <el-checkbox v-model="area.checked">
-                    {{area.text}}
-                </el-checkbox>
-            </span>
-        </div>
-        <div class="checkbox-select" name="户型">
-            <span class="checkbox-wrap" v-for="(unit,index) in queryModel.unitRange" :key="index">
-                <el-checkbox v-model="unit.checked">
-                    {{unit.text}}
-                </el-checkbox>
-            </span>
-        </div>
-        <div class="checkbox-select" name="用途">
-            <span class="checkbox-wrap" v-for="(purpos,index) in queryModel.purposRange" :key="index">
-                <el-checkbox v-model="purpos.checked">
-                    {{purpos.text}}
-                </el-checkbox>
-            </span>
-        </div>
-        <div class="checkbox-select" name="权属">
-            <span class="checkbox-wrap" v-for="(right,index) in queryModel.rightNature" :key="index">
-                <el-checkbox v-model="right.checked">
-                    {{right.text}}
-                </el-checkbox>
-            </span>
-        </div>
-        <div class="checkbox-select" name="楼层">
-            <span class="checkbox-wrap" v-for="(floor,index) in queryModel.floor" :key="index">
-                <el-checkbox v-model="floor.checked">
-                    {{floor.text}}
-                </el-checkbox>
-            </span>
-        </div>
-        <el-row :gutter="10">
+        <el-row style="margin-bottom: 5px;" :gutter="10">
             <el-col class="search-item" v-for="(range, index) in searchClientModel" :key="index" :span="3">
                 <template v-if="range.type == 'range'">
                     <range-picker
@@ -93,6 +30,11 @@
                     </el-select>
                 </template>
             </el-col>
+        </el-row>
+        <el-row>
+            <el-button style="float: left;" type="danger" @click="chooseClientType">
+                新增客源
+            </el-button>
         </el-row>
         <el-table
             ref="esfTable"
@@ -297,6 +239,12 @@
                 },
                 deep: true
             },
+            searchClientData: {
+                handler(val) {
+                    console.log(val);
+                },
+                deep: true
+            }
         },
         beforeMount() {
             this.initTable();
@@ -365,6 +313,23 @@
             tableHeight() {
                 let windowHeight = window.screen.height;
                 return windowHeight - 300;
+            },
+            searchClientData() {
+                return {
+                    clientType: this.searchClientModel.clientType.value,
+                    price: this.searchClientModel.price.value,
+                    area: this.searchClientModel.area.value,
+                    rent: this.searchClientModel.rent.value,
+                    needAddressDtos: this.searchClientModel.needAddressDtos.value,
+                    decoration: this.searchClientModel.decoration.value,
+                    purpose: this.searchClientModel.purpose.value,
+                    myClient: this.searchClientModel.myClient.value,
+                    unit: this.searchClientModel.unit.value,
+                    hall: this.searchClientModel.hall.value,
+                    depts: this.searchClientModel.depts.value,
+                    emps: this.searchClientModel.emps.value,
+                    like: this.searchClientModel.like.value
+                }
             }
         }
     }
@@ -446,11 +411,12 @@
             font-weight: 600;
         }
     }
+
     .search-item {
         margin-top: 5px;
         height: 32px;
         line-height: 32px;
-        /deep/.el-input__inner{
+        /deep/ .el-input__inner {
             height: 32px;
             line-height: 32px;
         }
