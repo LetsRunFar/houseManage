@@ -348,7 +348,7 @@
         width: 90%;
         min-width: 800px;
         .el-form-item__label {
-            width: 90px;
+            width: 105px;
         }
     }
 
