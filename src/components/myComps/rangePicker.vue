@@ -1,6 +1,6 @@
 <template>
     <div @click="showRangePicker" ref="rangeWrap" class="range-wrap">
-        <span v-if="iconClass" class="icon">
+        <span v-if="iconClass && !(lowerRange || higherRange)" class="icon">
             <i :class="iconClass"></i>
         </span>
         <i v-if="lowerRange || higherRange" class="el-icon-error clear-icon" @click.stop="clearRange"></i>
@@ -11,20 +11,22 @@
         <div v-show="rangeShow" class="range-picker">
             <el-row :gutter="10" class="inputs">
                 <el-col :span="11">
-                    <el-input @focus="isLowerRange = true" v-model="lowerRange" placeholder="0">{{lowerRange}}
+                    <el-input ref="lowerRangeInput" @focus="isLowerRange = true" v-model="lowerRange" placeholder="0">
+                        {{lowerRange}}
                     </el-input>
                 </el-col>
                 <el-col :span="2" style="vertical-align: middle;">
                     -
                 </el-col>
                 <el-col :span="11">
-                    <el-input @focus="isLowerRange = false" v-model="higherRange" placeholder="不限"></el-input>
+                    <el-input ref="higherRangeInput" @focus="isLowerRange = false" v-model="higherRange"
+                              placeholder="不限"></el-input>
                 </el-col>
             </el-row>
             <ul class="selects">
-                <li @click="lowerRange = ''" v-show="isLowerRange">0</li>
+                <li @click="checkRange()" v-show="isLowerRange">0</li>
                 <li @click="checkRange(range)" v-for="(range,index) in ranges" :key="index">{{range}}</li>
-                <li @click="higherRange = ''" v-show="isLowerRange === false">不限</li>
+                <li @click="checkRange()" v-show="isLowerRange === false">不限</li>
             </ul>
         </div>
     </div>
@@ -79,13 +81,27 @@
                 this.rangeShow = false;
             },
             checkRange(range) {
-                //选择的是最小值范围
+                //选择不限
+                if (!range) {
+                    if (!this.isLowerRange) {
+                        this.higherRange = '';
+                        this.$nextTick(() => {
+                            this.rangeShow = false;
+                        });
+                        return;
+                    }
+                }
+                //选择的是小值范围
                 if (this.isLowerRange) {
                     this.lowerRange = range;
+                    this.$refs.higherRangeInput.focus();
                 }
-                //选择的是最大值范围
+                //选择的是大值范围
                 else {
                     this.higherRange = range;
+                    this.$nextTick(() => {
+                        this.rangeShow = false;
+                    });
                 }
             },
             addEvent() {
@@ -169,10 +185,16 @@
                 deep: true
             },
             rangeShow: {
-                handler() {
+                handler(val) {
                     //切换时，设置默认显示小范围
                     this.isLowerRange = true;
                 }
+            },
+            resultValue: {
+                handler(val) {
+                    this.$emit('update:value', val);
+                },
+                deep: true
             }
         }
     }
@@ -185,21 +207,21 @@
         z-index: 10;
         line-height: 30px;
         height: 30px;
-        padding: 0 34px 0 10px;
+        padding: 0 14px 0 10px;
         background-color: #fff;
         border: solid 1px #ebeef5;
         font-size: 15px;
         &:hover {
             cursor: pointer;
         }
-        .clear-icon{
+        .clear-icon {
             position: absolute;
-            right: 20px;
+            right: 5px;
             top: 50%;
             margin-top: -6px;
             font-size: 14px;
             color: #d0d0d0;
-            &:hover{
+            &:hover {
                 color: #797979;
             }
         }
@@ -217,6 +239,9 @@
         }
         .range-picker {
             width: 150%;
+            height: 300px;
+            overflow-y: auto;
+            overflow-x: hidden;
             position: absolute;
             min-width: 150px;
             top: 31px;
