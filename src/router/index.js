@@ -48,6 +48,13 @@ export default new Router({
                     path: '/zlkeyuan',
                     component: resolve => require(['../pages/zlkeyuan.vue'], resolve),
                     meta: {title: '租赁客源'}
+                },
+                {
+                    path: '/detail',
+                    component: resolve => require(['../pages/yishoudetail.vue'], resolve),
+                    meta: {
+                        title: '房屋详情'
+                    }
                 }
             ]
         },

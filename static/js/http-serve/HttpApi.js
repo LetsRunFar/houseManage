@@ -2,24 +2,24 @@ import axios from 'axios'
 import {Message} from 'element-ui'
 import globalDomain from 'static/js/config'
 
-axios.interceptors.request.use(config=> {
+axios.interceptors.request.use(config => {
     return config;
-}, err=> {
+}, err => {
     Message.error({message: '请求超时!'});
     return Promise.resolve(err);
 });
-axios.interceptors.response.use(res=> {
+axios.interceptors.response.use(res => {
     if (res.status && res.status == 200 && res.data.code != 200) {
         Message.error({message: data.data.error});
         return;
     }
     return res.data;
-}, err=> {
-    if (err.response.status == 504||err.response.status == 404) {
+}, err => {
+    if (err.response.status == 504 || err.response.status == 404) {
         Message.error({message: '系统异常！'});
     } else if (err.response.status == 403) {
         Message.error({message: '权限不足,请联系管理员!'});
-    }else {
+    } else {
         Message.error({message: '未知错误!'});
     }
     return Promise.resolve(err);
@@ -83,9 +83,14 @@ export const getRequest = (url) => {
 }
 
 export const ApiMethods = {
-    ErshoufangApi:{
+    ErshoufangApi: {
         queryAll: () => {
             return getRequest(globalDomain.api + 'gycGS9Nc9e13b9ecd9991b65d693d55a45ee44094b05162?uri=house/esfs')
+        }
+    },
+    YishoufangApi: {
+        queryAll: () => {
+            return getRequest(globalDomain.api + 'gycGS9Nc9e13b9ecd9991b65d693d55a45ee44094b05162?uri=/house/loupans')
         }
     }
 }
