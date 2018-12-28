@@ -1,97 +1,11 @@
 <template>
     <div class="main">
-        <el-row style="margin-bottom: 5px;" :gutter="10">
-            <el-col class="search-item" v-for="(item, index) in searchEsfModel" :key="index" :span="3">
-                <template v-if="item.type == 'range'">
-                    <range-picker
-                        :value.sync="item.value"
-                        :min="item.min"
-                        :max="item.max"
-                        :unit="item.unit"
-                        :gap="item.gap"
-                        :placeholder="item.label">
-                    </range-picker>
-                </template>
-                <template v-else-if="item.type == 'input'">
-                    <el-input v-model="item.value" :placeholder="item.label"></el-input>
-                </template>
-                <template v-else-if="item.type=='select'">
-                    <el-select
-                        :placeholder="item.label"
-                        clearable
-                        size="mini"
-                        v-model="item.value">
-                        <el-option
-                            v-for="option in item.options"
-                            :key="option.value"
-                            :label="option.label"
-                            :value="option.value">
-                        </el-option>
-                    </el-select>
-                </template>
-            </el-col>
-        </el-row>
+        <query-filter :searchModel="searchEsfModel"></query-filter>
         <el-row>
             <el-button type="danger" @click="$refs.createNewEsf.showFirst()">
                 新增房源
             </el-button>
         </el-row>
-        <!--<div class="area-select" name="位置">
-            <div class="regions">
-                <span @click="queryRegion(region.id)"
-                      :class="{'region':true,'active': queryModel.regionId == region.id}"
-                      v-for="(region,index) in regions" :key="index">
-                    {{region.name}}
-                </span>
-            </div>
-            <div class="areas" v-if="areas">
-                <span @click="queryArea(area.id)" :class="{'area':true,'active':queryModel.areaId == area.id}"
-                      v-for="(area,index) in areas" :key="index">{{area.name}}</span>
-            </div>
-        </div>
-        <div class="checkbox-select" name="售价">
-            <span class="checkbox-wrap" v-for="(total,index) in queryModel.saleTotalRange" :key="index">
-                <el-checkbox v-model="total.checked">
-                    {{total.text}}
-                </el-checkbox>
-            </span>
-        </div>
-        <div class="checkbox-select" name="面积">
-            <span class="checkbox-wrap" v-for="(area,index) in queryModel.areaRange" :key="index">
-                <el-checkbox v-model="area.checked">
-                    {{area.text}}
-                </el-checkbox>
-            </span>
-        </div>
-        <div class="checkbox-select" name="户型">
-            <span class="checkbox-wrap" v-for="(unit,index) in queryModel.unitRange" :key="index">
-                <el-checkbox v-model="unit.checked">
-                    {{unit.text}}
-                </el-checkbox>
-            </span>
-        </div>
-        <div class="checkbox-select" name="用途">
-            <span class="checkbox-wrap" v-for="(purpos,index) in queryModel.purposRange" :key="index">
-                <el-checkbox v-model="purpos.checked">
-                    {{purpos.text}}
-                </el-checkbox>
-            </span>
-        </div>
-        <div class="checkbox-select" name="权属">
-            <span class="checkbox-wrap" v-for="(right,index) in queryModel.rightNature" :key="index">
-                <el-checkbox v-model="right.checked">
-                    {{right.text}}
-                </el-checkbox>
-            </span>
-        </div>
-        <div class="checkbox-select" name="楼层">
-            <span class="checkbox-wrap" v-for="(floor,index) in queryModel.floor" :key="index">
-                <el-checkbox v-model="floor.checked">
-                    {{floor.text}}
-                </el-checkbox>
-            </span>
-        </div>-->
-
         <el-table
             ref="esfTable"
             :data="esfData"
@@ -170,19 +84,14 @@
     import QueryStatus from 'myComps/queryStatus'
     import SubjectQuery from 'myComps/subjectQuery'
     import CreateModel from 'myComps/createModel'
-    import RangePicker from 'myComps/rangePicker'
+    import QueryFilter from 'myComps/queryFilter'
     import {
-        saleTotalRange,
-        areaRange,
-        unitRange,
-        purposRange,
-        rightNature,
-        floor, newErshoufangModel, searchEsfModel
+        newErshoufangModel, searchEsfModel
     } from 'static/js/model'
 
     export default {
         name: "ershoufang",
-        components: {QueryStatus, SubjectQuery, CreateModel, RangePicker},
+        components: {QueryStatus, SubjectQuery, CreateModel, QueryFilter},
         data() {
             return {
                 esfData: [],
@@ -243,18 +152,6 @@
                 ],
                 areas: null,
                 checkedStatu: null,
-                queryModel: {
-                    regionId: '',
-                    areaRange,
-                    unitRange,
-                    saleTotalRange,
-                    floor,
-                    rightNature,
-                    purposRange,
-                    created: '',
-                    emps: '',
-                    like: '',
-                },
                 tradeTypes: [
                     {
                         value: '1',

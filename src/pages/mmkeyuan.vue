@@ -1,36 +1,6 @@
 <template>
     <div class="main">
-        <el-row style="margin-bottom: 5px;" :gutter="10">
-            <el-col class="search-item" v-for="(range, index) in searchClientModel" :key="index" :span="3">
-                <template v-if="range.type == 'range'">
-                    <range-picker
-                        :value.sync="range.value"
-                        :min="range.min"
-                        :max="range.max"
-                        :unit="range.unit"
-                        :gap="range.gap"
-                        :placeholder="range.label">
-                    </range-picker>
-                </template>
-                <template v-else-if="range.type == 'input'">
-                    <el-input v-model="range.value" :placeholder="range.label"></el-input>
-                </template>
-                <template v-else-if="range.type=='select'">
-                    <el-select
-                        :placeholder="range.label"
-                        clearable
-                        size="mini"
-                        v-model="range.value">
-                        <el-option
-                            v-for="option in range.options"
-                            :key="option.value"
-                            :label="option.label"
-                            :value="option.value">
-                        </el-option>
-                    </el-select>
-                </template>
-            </el-col>
-        </el-row>
+        <query-filter :searchModel="searchClientModel"></query-filter>
         <el-row>
             <el-button style="float: left;" type="danger" @click="chooseClientType">
                 新增客源
@@ -118,19 +88,14 @@
     import QueryStatus from 'myComps/queryStatus'
     import SubjectQuery from 'myComps/subjectQuery'
     import CreateModel from 'myComps/createModel'
-    import RangePicker from 'myComps/rangePicker'
+    import QueryFilter from 'myComps/queryFilter'
     import {
-        saleTotalRange,
-        areaRange,
-        unitRange,
-        purposRange,
-        rightNature,
-        floor, newClientModel, newClientRentModel, searchClientModel
+        newClientModel, newClientRentModel, searchClientModel
     } from 'static/js/model'
 
     export default {
         name: "ershoufang",
-        components: {QueryStatus, SubjectQuery, CreateModel, RangePicker},
+        components: {QueryStatus, SubjectQuery, CreateModel, QueryFilter},
         data() {
             return {
                 outerTitle: '',
@@ -193,18 +158,6 @@
                 ],
                 areas: null,
                 checkedStatu: null,
-                queryModel: {
-                    regionId: '',
-                    areaRange,
-                    unitRange,
-                    saleTotalRange,
-                    floor,
-                    rightNature,
-                    purposRange,
-                    created: '',
-                    emps: '',
-                    like: '',
-                },
                 tradeTypes: [
                     {
                         value: '1',
@@ -233,12 +186,6 @@
                 },
                 deep: true
             },
-            'queryModel.saleTotal': {
-                handler(val) {
-                    console.log(val);
-                },
-                deep: true
-            },
             searchClientData: {
                 handler(val) {
                     console.log(val);
@@ -248,7 +195,6 @@
         },
         beforeMount() {
             this.initTable();
-            console.log(this.queryModel);
         },
         methods: {
             async initTable() {
@@ -263,26 +209,6 @@
             },
             handleCheckStatus(param) {
                 this.checkedStatu = param;
-            },
-            queryRegion(regionId) {
-                this.queryModel.regionId = regionId;
-                this.areas = [
-                    {
-                        id: 1,
-                        name: '北滨路'
-                    },
-                    {
-                        id: 2,
-                        name: '大竹林'
-                    },
-                    {
-                        id: 3,
-                        name: '大竹林'
-                    }
-                ]
-            },
-            queryArea(areaId) {
-                this.queryModel.areaId = areaId;
             },
             createNewEsf(data) {
                 console.log(data);
@@ -409,16 +335,6 @@
             content: attr(name);
             left: 10px;
             font-weight: 600;
-        }
-    }
-
-    .search-item {
-        margin-top: 5px;
-        height: 32px;
-        line-height: 32px;
-        /deep/ .el-input__inner {
-            height: 32px;
-            line-height: 32px;
         }
     }
 </style>
