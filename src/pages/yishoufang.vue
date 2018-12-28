@@ -172,7 +172,6 @@
         font-size: 12px;
         .el-form-item {
             width: 180px;
-            margin-right: 40px;
         }
         .el-form-item__content {
             font-size: 12px;
