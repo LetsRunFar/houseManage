@@ -1,7 +1,13 @@
 <template>
     <div>
         <query-filter :searchModel="searchYsfModel"></query-filter>
+        <el-row>
+            <el-button type="danger" @click="$refs.createNewYsf.showFirst()">
+                新增楼盘
+            </el-button>
+        </el-row>
         <el-table
+            class="center-table blue-header"
             border
             :data="ysfData"
             style="width: 100%">
@@ -59,7 +65,11 @@
                     </el-form>
                 </template>
             </el-table-column>
-            <el-table-column label="楼盘名称" prop="name"></el-table-column>
+            <el-table-column label="楼盘名称">
+                <template slot-scope="scope">
+                    <router-link :to="{path: '/detail', query:{id: scope.row.id}}">{{scope.row.name}}</router-link>
+                </template>
+            </el-table-column>
             <el-table-column label="产权性质" prop="rightNature"></el-table-column>
             <el-table-column width="240" label="楼盘位置">
                 <template slot-scope="scope">
@@ -86,24 +96,37 @@
                     {{scope.row.soldQuantity}}（已售） / {{scope.row.quantity}}
                 </template>
             </el-table-column>
+
+            <el-table-column label="操作">
+                <template slot-scope="scope">
+                    <router-link :to="{path: '/detail', query:{id: scope.row.id}}">查看</router-link>
+                </template>
+            </el-table-column>
         </el-table>
+        <create-model
+            ref="createNewYsf"
+            :createModel.sync="newYishoufangModel"
+            @doCreate="createNewYsf">
+        </create-model>
     </div>
 </template>
 
 <script>
     import {ApiMethods} from 'httpserve/HttpApi'
     import QueryFilter from 'myComps/queryFilter'
+    import CreateModel from 'myComps/createModel'
     import {
-        searchYsfModel
+        searchYsfModel, newYishoufangModel
     } from 'static/js/model'
 
     export default {
         name: "yishoufang",
-        components: {QueryFilter},
+        components: {QueryFilter, CreateModel},
         data() {
             return {
                 ysfData: [],
-                searchYsfModel: searchYsfModel
+                searchYsfModel: searchYsfModel,
+                newYishoufangModel: newYishoufangModel,
             }
         },
         beforeMount() {
@@ -117,24 +140,20 @@
                     this.ysfData.push(res.data.content);
                 }
             },
+            createNewYsf() {
+                console.log(this.newYishoufangModel);
+            }
         },
         computed: {
             searchEsfData() {
                 return {
-                    status: this.searchYsfModel.status.value,
-                    locked: this.searchYsfModel.locked.value,
-                    decoration: this.searchYsfModel.decoration.value,
-                    purpose: this.searchYsfModel.purpose.value,
-                    unit: this.searchYsfModel.unit.value,
-                    hall: this.searchYsfModel.hall.value,
                     chinaAreaA: this.searchYsfModel.chinaAreaA.value,
-                    divideId: this.searchYsfModel.divideId.value,
+                    room: this.searchYsfModel.room.value,
                     area: this.searchYsfModel.area.value,
-                    saleTotal: this.searchYsfModel.saleTotal.value,
-                    created: this.searchYsfModel.created.value,
-                    floor: this.searchYsfModel.floor.value,
-                    rightNature: this.searchYsfModel.rightNature.value,
-                    myEsf: this.searchYsfModel.myEsf.value,
+                    avgPrice: this.searchYsfModel.avgPrice.value,
+                    tatlePrice: this.searchYsfModel.tatlePrice.value,
+                    chinaAreaA: this.searchYsfModel.chinaAreaA.value,
+
                 }
             }
         },

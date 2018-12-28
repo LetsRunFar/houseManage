@@ -167,3 +167,13 @@ a {
 .v-note-wrapper .v-note-panel {
     min-height: 500px;
 }
+
+/*tables*/
+.blue-header.el-table /deep/ th {
+    text-align: center;
+    background-color: #409eff;
+    color: #fff;
+}
+.center-table {
+    text-align: center;
+}

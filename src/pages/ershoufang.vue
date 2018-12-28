@@ -10,7 +10,7 @@
             ref="esfTable"
             :data="esfData"
             tooltip-effect="dark"
-            class="center-table"
+            class="center-table blue-header"
             style="width: 100%;"
             :height="tableHeight"
             border
@@ -96,71 +96,6 @@
             return {
                 esfData: [],
                 selectedRows: [],
-                statusSelection: [
-                    {
-                        id: 1,
-                        text: '有效',
-                        subStatus: [
-                            {
-                                id: 1,
-                                text: '公盘'
-                            },
-                            {
-                                id: 2,
-                                text: '私盘'
-                            }
-                        ]
-                    },
-                    {
-                        id: 2,
-                        text: '成交',
-                        subStatus: [
-                            {
-                                id: 1,
-                                text: '我售'
-                            },
-                            {
-                                id: 2,
-                                text: '我租'
-                            }
-                        ]
-                    },
-                    {
-                        id: 3,
-                        text: '失效',
-                        subStatus: [
-                            {
-                                id: 1,
-                                text: '我售'
-                            },
-                            {
-                                id: 2,
-                                text: '我租'
-                            }
-                        ]
-                    }
-                ],
-                regions: [
-                    {
-                        id: 1,
-                        name: '江北'
-                    },
-                    {
-                        id: 2,
-                        name: '渝北'
-                    }
-                ],
-                areas: null,
-                checkedStatu: null,
-                tradeTypes: [
-                    {
-                        value: '1',
-                        label: '出售'
-                    }, {
-                        value: '2',
-                        label: '出租'
-                    }
-                ],
                 newErshoufangModel: newErshoufangModel,
                 searchEsfModel: searchEsfModel,
             }
@@ -213,29 +148,6 @@
             },
             handleSelectionChange(val) {
                 this.selectedRows.push(val);
-            },
-            handleCheckStatus(param) {
-                this.checkedStatu = param;
-            },
-            queryRegion(regionId) {
-                this.queryModel.regionId = regionId;
-                this.areas = [
-                    {
-                        id: 1,
-                        name: '北滨路'
-                    },
-                    {
-                        id: 2,
-                        name: '大竹林'
-                    },
-                    {
-                        id: 3,
-                        name: '大竹林'
-                    }
-                ]
-            },
-            queryArea(areaId) {
-                this.queryModel.areaId = areaId;
             },
             createNewEsf(data) {
                 console.log(data);
@@ -325,88 +237,5 @@
 </script>
 
 <style lang="less" scoped>
-    .center-table {
-        text-align: center;
-    }
 
-    .center-table.el-table /deep/ th {
-        text-align: center;
-        background-color: #409eff;
-        color: #fff;
-    }
-
-    .area-select {
-        position: relative;
-        line-height: 24px;
-        padding-left: 60px;
-        font-size: 12px;
-        &:before {
-            position: absolute;
-            content: attr(name);
-            left: 10px;
-            font-weight: 600;
-        }
-        .regions {
-            .region {
-                float: left;
-                margin-right: 20px;
-                cursor: pointer;
-                &:hover {
-                    text-decoration: underline;
-                }
-                &.active {
-                    color: #0e85ff;
-                }
-            }
-            &:after {
-                display: block;
-                content: '';
-                clear: both;
-            }
-        }
-        .areas {
-            .area {
-                float: left;
-                margin-right: 20px;
-                cursor: pointer;
-                &:hover {
-                    text-decoration: underline;
-                }
-                &.active {
-                    color: #0e85ff;
-                }
-            }
-            &:after {
-                display: block;
-                content: '';
-                clear: both;
-            }
-        }
-    }
-
-    .checkbox-select {
-        position: relative;
-        line-height: 24px;
-        padding-left: 60px;
-        font-size: 12px;
-        .checkbox-wrap {
-            display: inline-block;
-            width: 140px;
-        }
-        &:before {
-            position: absolute;
-            content: attr(name);
-            left: 10px;
-            font-weight: 600;
-        }
-    }
-    .search-item {
-        margin-top: 5px;
-        height: 32px;
-        line-height: 32px;
-        /deep/.el-input__inner{
-            height: 32px;
-            line-height: 32px;
-        }
-    }
 </style>

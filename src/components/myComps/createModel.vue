@@ -287,7 +287,7 @@
             checkDoCreate() {
                 this.$refs.innerCreateForm.validate((valid) => {
                     if (valid) {
-                        this.$emit('doCreate', '');
+                        this.$emit('doCreate');
                     } else {
                         return false;
                     }
