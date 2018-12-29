@@ -99,6 +99,12 @@ export const ApiMethods = {
     ClientApi: {
         queryAll: () => {
             return getRequest(globalDomain.api + 'gycGS9Nc9e13b9ecd9991b65d693d55a45ee44094b05162?uri=http://localhost:8080/clients')
+        },
+        detail: ({id}) => {
+            return getRequest(globalDomain.api + 'gycGS9Nc9e13b9ecd9991b65d693d55a45ee44094b05162?uri=http://localhost:8080/clients/' + id)
+        },
+        follers: ({id}) => {
+            return getRequest(globalDomain.api + `gycGS9Nc9e13b9ecd9991b65d693d55a45ee44094b05162?uri=http://localhost:8080/house/client/${id}/follers`)
         }
     }
 }

@@ -10,6 +10,7 @@
                     background-color="#242f42"
                     text-color="#fff"
                     active-text-color="#409EFF">
+                    <el-menu-item index="1" @click.native="$router.push('/')">首页</el-menu-item>
                     <el-submenu index="2">
                         <template slot="title">房源管理</template>
                         <el-menu-item index="2-1" @click.native="$router.push('/ershoufang')">二手房源</el-menu-item>

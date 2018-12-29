@@ -67,7 +67,7 @@
             </el-table-column>
             <el-table-column label="楼盘名称">
                 <template slot-scope="scope">
-                    <router-link :to="{path: '/detail', query:{id: scope.row.id}}">{{scope.row.name}}</router-link>
+                    <router-link title="查看详情" :to="{path: '/ysf/detail', query:{id: scope.row.id}}">{{scope.row.name}}</router-link>
                 </template>
             </el-table-column>
             <el-table-column label="产权性质" prop="rightNature"></el-table-column>
