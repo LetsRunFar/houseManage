@@ -92,8 +92,13 @@ export const ApiMethods = {
         queryAll: () => {
             return getRequest(globalDomain.api + 'gycGS9Nc9e13b9ecd9991b65d693d55a45ee44094b05162?uri=/house/loupans')
         },
-        detail: (param) => {
-            return getRequest(globalDomain.api + 'gycGS9Nc9e13b9ecd9991b65d693d55a45ee44094b05162?uri=/house/loupans/' + param.id)
+        detail: ({id}) => {
+            return getRequest(globalDomain.api + 'gycGS9Nc9e13b9ecd9991b65d693d55a45ee44094b05162?uri=/house/loupans/' + id)
+        }
+    },
+    ClientApi: {
+        queryAll: () => {
+            return getRequest(globalDomain.api + 'gycGS9Nc9e13b9ecd9991b65d693d55a45ee44094b05162?uri=http://localhost:8080/clients')
         }
     }
 }

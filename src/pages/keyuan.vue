@@ -8,7 +8,7 @@
         </el-row>
         <el-table
             ref="esfTable"
-            :data="esfData"
+            :data="clientData"
             tooltip-effect="dark"
             class="center-table blue-header"
             style="width: 100%;"
@@ -19,56 +19,66 @@
                 type="selection"
                 width="30">
             </el-table-column>
-            <el-table-column label="标签">
-                <template slot-scope="scope">
-                    <span v-for="(item,index) in scope.row.tags" :key="index">
-                        {{item.tagName}}
+            <el-table-column label="客源编号">
+                <template slot-scope="prop">
+                    <router-link title="查看详情" :to="{path: '/client/detail', query:{id: prop.row.id}}">{{prop.row.code}}</router-link>
+                </template>
+            </el-table-column>
+            <el-table-column label="客源类型" prop="clientType"></el-table-column>
+            <el-table-column label="责任人">
+                <template slot-scope="prop">
+                    {{prop.row.entering.name}}
+                </template>
+            </el-table-column>
+            <el-table-column label="录入人">
+                <template slot-scope="prop">
+                    {{prop.row.principal.name}}
+                </template>
+            </el-table-column>
+            <el-table-column label="私有或公有">
+                <template slot-scope="prop">
+                    <template v-if="prop.row.shared">公有</template>
+                    <template v-else>私有</template>
+                </template>
+            </el-table-column>
+            <el-table-column label="客户来源" prop="source"></el-table-column>
+            <el-table-column label="状态" prop="status"></el-table-column>
+            <el-table-column width="160" label="创建时间" prop="createdTime"></el-table-column>
+            <el-table-column width="160" label="最后访问时间" prop="finallyTime"></el-table-column>
+            <el-table-column width="160" label="下次访问时间" prop="needTime"></el-table-column>
+            <el-table-column label="户口信息" prop="account"></el-table-column>
+
+            <el-table-column label="需求位置">
+                <template slot-scope="prop">
+                    <span v-for="(item, index) in prop.row.needAddressDtos" :kay="index">
+                        {{item.divideName}}
                     </span>
                 </template>
             </el-table-column>
-            <el-table-column label="类型">
-                <template slot-scope="scope">{{scope.row.bizType}}</template>
-            </el-table-column>
-            <el-table-column label="用途">
-                <template slot-scope="scope">{{scope.row.purpose}}</template>
-            </el-table-column>
-            <el-table-column
-                label="产权性质">
-                <template slot-scope="scope">{{ scope.row.rightNature }}</template>
-            </el-table-column>
-            <el-table-column label="状态">
-                <template slot-scope="scope">{{scope.row.open ? '公盘' : '私盘'}}</template>
-            </el-table-column>
-            <el-table-column label="房源编号">
-                <template slot-scope="scope">{{scope.row.code}}</template>
-            </el-table-column>
-            <el-table-column
-                label="小区">
-                <template slot-scope="scope">{{ scope.row.villageName }}</template>
-            </el-table-column>
-            <el-table-column
-                label="楼层">
-                <template slot-scope="scope">{{ scope.row.floor }}F / {{ scope.row.totalFloor }}</template>
-            </el-table-column>
-            <el-table-column
-                label="房型"
-                width="90">
-                <template slot-scope="scope">{{scope.row.roomTypeDto.room || '-'}}室{{scope.row.roomTypeDto.hall ||
-                    '-'}}厅{{scope.row.roomTypeDto.toilet || '-'}}卫{{scope.row.roomTypeDto.balcony ||
-                    '-'}}台{{scope.row.roomTypeDto.kitchen || '-'}}厨
+            <el-table-column label="操作">
+                <template slot-scope="prop">
+                    <el-popover v-if="prop.row.buyNeeds" trigger="hover" placement="bottom">
+                        <p>价格区间：{{ prop.row.buyNeeds.minTotalPrice }} - {{prop.row.buyNeeds.maxTotalPrice}}</p>
+                        <p>面积区间：{{ prop.row.buyNeeds.minArea }} - {{prop.row.buyNeeds.maxArea}}</p>
+                        <p>装修：{{prop.row.buyNeeds.decoration}}</p>
+                        <p>用途：{{prop.row.buyNeeds.purpose}}</p>
+                        <p>户型：{{prop.row.buyNeeds.unit}}室 {{prop.row.buyNeeds.hall}}厅</p>
+                        <p>付款方式：{{prop.row.buyNeeds.payWay}}</p>
+                        <div slot="reference" class="name-wrapper">
+                            <el-button size="mini" @click="$router.push({path: '/client/detail', query:{id: prop.row.id}})">查看详情</el-button>
+                        </div>
+                    </el-popover>
+                    <el-popover v-else-if="prop.row.leaseNeeds" trigger="hover" placement="bottom">
+                        <p>价格区间：{{ prop.row.leaseNeeds.minMonth }} - {{prop.row.leaseNeeds.maxMonth}}</p>
+                        <p>面积区间：{{ prop.row.leaseNeeds.minArea }} - {{prop.row.leaseNeeds.maxArea}}</p>
+                        <p>装修：{{prop.row.leaseNeeds.decoration}}</p>
+                        <p>用途：{{prop.row.leaseNeeds.purpose}}</p>
+                        <p>户型：{{prop.row.leaseNeeds.unit}}室 {{prop.row.leaseNeeds.hall}}厅</p>
+                        <div slot="reference" class="name-wrapper">
+                            <el-button size="mini" @click="$router.push({path: '/client/detail', query:{id: prop.row.id}})">查看详情</el-button>
+                        </div>
+                    </el-popover>
                 </template>
-            </el-table-column>
-            <el-table-column
-                label="建筑面积">
-                <template slot-scope="scope">{{ scope.row.buildingArea }}</template>
-            </el-table-column>
-            <el-table-column
-                label="总价">
-                <template slot-scope="scope">{{ scope.row.dealInfoDto.BigDecimal | tenThousands }}</template>
-            </el-table-column>
-            <el-table-column
-                label="录入人">
-                <template slot-scope="scope">{{ scope.row.entering.empName }}</template>
             </el-table-column>
         </el-table>
 
@@ -94,13 +104,13 @@
     } from 'static/js/model'
 
     export default {
-        name: "ershoufang",
+        name: "keyuan",
         components: {QueryStatus, SubjectQuery, CreateModel, QueryFilter},
         data() {
             return {
                 outerTitle: '',
                 innerTitle: '',
-                esfData: [],
+                clientData: [],
                 selectedRows: [],
                 newClientModel: null,
                 searchClientModel: searchClientModel,
@@ -126,10 +136,10 @@
         },
         methods: {
             async initTable() {
-                let res = await ApiMethods.ErshoufangApi.queryAll();
+                let res = await ApiMethods.ClientApi.queryAll();
                 if (res.code == 200) {
                     console.log(res.data);
-                    this.esfData.push(res.data);
+                    this.clientData.push(res.data.content);
                 }
             },
             handleSelectionChange(val) {

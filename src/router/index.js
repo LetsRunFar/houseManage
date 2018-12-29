@@ -40,20 +40,22 @@ export default new Router({
                     meta: {title: '一手房源'}
                 },
                 {
-                    path: '/mmkeyuan',
-                    component: resolve => require(['../pages/mmkeyuan.vue'], resolve),
-                    meta: {title: '买卖客源'}
+                    path: '/keyuan',
+                    component: resolve => require(['../pages/keyuan.vue'], resolve),
+                    meta: {title: '客源管理'}
                 },
                 {
-                    path: '/zlkeyuan',
-                    component: resolve => require(['../pages/zlkeyuan.vue'], resolve),
-                    meta: {title: '租赁客源'}
-                },
-                {
-                    path: '/detail',
+                    path: '/ysf/detail',
                     component: resolve => require(['../pages/yishoudetail.vue'], resolve),
                     meta: {
                         title: '房屋详情'
+                    }
+                },
+                {
+                    path: '/client/detail',
+                    component: resolve => require(['../pages/keyuandetail.vue'], resolve),
+                    meta: {
+                        title: '客源详情'
                     }
                 }
             ]

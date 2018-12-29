@@ -15,11 +15,7 @@
                         <el-menu-item index="2-1" @click.native="$router.push('/ershoufang')">二手房源</el-menu-item>
                         <el-menu-item index="2-2" @click.native="$router.push('/yishoufang')">一手房源</el-menu-item>
                     </el-submenu>
-                    <el-submenu index="3">
-                        <template slot="title">客源管理</template>
-                        <el-menu-item index="3-1" @click.native="$router.push('/mmkeyuan')">买卖客源</el-menu-item>
-                        <el-menu-item index="3-2" @click.native="$router.push('/zlkeyuan')">租赁客源</el-menu-item>
-                    </el-submenu>
+                    <el-menu-item index="3-1" @click.native="$router.push('/keyuan')">客源管理</el-menu-item>
                     <el-menu-item index="4">订单管理</el-menu-item>
                 </el-menu>
             </el-col>

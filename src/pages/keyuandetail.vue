@@ -1,12 +1,12 @@
 <template>
     <div>
-        租赁客源
+        客源详情
     </div>
 </template>
 
 <script>
     export default {
-        name: "zlkeyuan"
+        name: "keyuandetail"
     }
 </script>
 
