@@ -10,7 +10,7 @@ axios.interceptors.request.use(config => {
 });
 axios.interceptors.response.use(res => {
     if (res.status && res.status == 200 && res.data.code != 200) {
-        Message.error({message: data.data.error});
+        Message.error({message: res.data.error});
         return;
     }
     return res.data;
@@ -105,6 +105,15 @@ export const ApiMethods = {
         },
         follers: ({id}) => {
             return getRequest(globalDomain.api + `gycGS9Nc9e13b9ecd9991b65d693d55a45ee44094b05162?uri=http://localhost:8080/house/client/${id}/follers`)
+        },
+        collect: (param) => {
+            return postRequest(globalDomain.api + `gycGS9Nc9e13b9ecd9991b65d693d55a45ee44094b05162?uri=http://localhost:8080/clients/collect`, param)
+        },
+        addFollow: (param) => {
+            return postRequest(globalDomain.api + 'gycGS9Nc9e13b9ecd9991b65d693d55a45ee44094b05162?uri=http://localhost:8080/house/foller', param)
+        },
+        transform: ({id}) => {
+            return putRequest(globalDomain.api + `gycGS9Nc9e13b9ecd9991b65d693d55a45ee44094b05162?uri=http://localhost:8080/client/${id}/principal`)
         }
     }
 }
