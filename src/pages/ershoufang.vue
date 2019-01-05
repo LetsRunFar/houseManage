@@ -173,7 +173,7 @@
                         kitchen: this.newErshoufangModel.baseInfo.roomType.value.kitchen
                     },
                     owner: {
-                        attitude: this.newErshoufangModel.attachInfo.ownerAttitude.value,
+                        attitude: '',
                         mentality: '',
                         remark: '',
                         contacts: {
@@ -191,7 +191,7 @@
                         totalPrice: this.newErshoufangModel.baseInfo.totalPrice.value,
                         saleBasePrice: this.newErshoufangModel.baseInfo.saleBasePrice.value,
                     },
-                    bizType: this.newErshoufangModel.attachInfo.bizType,
+                    bizType: this.newErshoufangModel.baseInfo.bizType,
                     age: '',
                     checkingCondition: '',
                     checkingTime: '',

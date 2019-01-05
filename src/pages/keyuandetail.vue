@@ -196,91 +196,24 @@
             </span>
         </el-dialog>
         <el-dialog
-            @close="closeTransform"
             title="修改基本信息"
-            width="50%"
+            width="900px"
             :visible.sync="showModify">
-            <el-form ref="modifyForm" label-width="80px">
-                <el-row>
-                    <el-col v-for="(item,index) in modifyModel" :key="index" :span="8">
-                        <el-form-item
-                            :label="item.label">
-                            <template v-if="item.type == 'input'">
-                                <el-input :style="{'width': item.width || 'auto'}" v-model="item.value"
-                                          :placeholder="item.placeholder || ''"></el-input>
-                            </template>
-                            <template v-else-if="item.type=='select'">
-                                <el-select
-                                    :style="{'width': item.width || 'auto'}"
-                                    clearable
-                                    size="mini"
-                                    :placeholder="item.placeholder || ''"
-                                    v-model="item.value">
-                                    <el-option
-                                        v-for="option in item.options"
-                                        :key="option.value"
-                                        :label="option.label"
-                                        :value="option.value">
-                                    </el-option>
-                                </el-select>
-                            </template>
-                            <template v-else-if="item.type=='cascader'">
-                                <el-cascader
-                                    :style="{'width': item.width || 'auto'}"
-                                    :options="item.options"
-                                    v-model="item.value"
-                                    change-on-select>
-                                </el-cascader>
-                            </template>
-                            <template v-else-if="item.type == 'multi'">
-                                <el-row :gutter="10">
-                                    <el-col :span="24/(item.children.length)" v-for="(child,i) in item.children" :key="i">
-                                        <template v-if="child.type == 'input'">
-                                            <el-input
-                                                :style="{'width': child.width || 'auto'}"
-                                                v-model="item.value[child.model]"
-                                                :placeholder="child.placeholder">
-                                                <template v-if="item.unit" slot="append">{{item.unit}}
-                                                </template>
-                                                <template v-else-if="child.unit" slot="append">
-                                                    {{child.unit}}
-                                                </template>
-                                            </el-input>
-                                        </template>
-                                        <template v-else-if="child.type=='select'">
-                                            <el-select
-                                                :style="{'width': child.width || 'auto'}"
-                                                clearable
-                                                size="mini"
-                                                :placeholder="child.placeholder"
-                                                v-model="item.value[child.model]">
-                                                <el-option
-                                                    v-for="option in child.options"
-                                                    :key="option.value"
-                                                    :label="option.label"
-                                                    :value="option.value">
-                                                </el-option>
-                                            </el-select>
-                                        </template>
-                                    </el-col>
-                                </el-row>
-                            </template>
-                        </el-form-item>
-                    </el-col>
-                </el-row>
-            </el-form>
-            <span slot="footer" class="dialog-footer">
-                <el-button @click="showModify = false">取 消</el-button>
-                <el-button type="primary" @click="doModify">确 定</el-button>
-            </span>
+            <multi-form
+                :model.sync="modifyModel"
+                @doCreate="doModify">
+            </multi-form>
         </el-dialog>
     </div>
 </template>
 
 <script>
     import {ApiMethods} from "static/js/http-serve/HttpApi";
+    import MultiForm from "@/components/myComps/multiForm";
+
     export default {
         name: "keyuandetail",
+        components: {MultiForm},
         data() {
             return {
                 detailInfo: {},
@@ -344,6 +277,136 @@
                         label: '其他',
                     }
                 ],
+                modifyModel: {
+                    clientType: {
+                        label: '客源类型',
+                        type: 'select',
+                        required: true,
+                        value: '',
+                        rules: [{required: true, message: '请选择交易类型'}],
+                        options: [
+                            {
+                                label: '出售',
+                                value: '1'
+                            },
+                            {
+                                label: '出租',
+                                value: '2'
+                            }
+                        ]
+                    },
+                    source: {
+                        type: 'input',
+                        value: '',
+                        label: '客户来源',
+                    },
+                    account: {
+                        type: 'input',
+                        value: '',
+                        label: '户口信息'
+                    },
+                    needAddressDtos: {
+                        type: 'input',
+                        value: '',
+                        label: '需求位置'
+                    },
+                    buyNeeds: {
+                        minTotalPrice: {
+                            type: 'input',
+                            value: '',
+                            label: '最低总价'
+                        },
+                        maxTotalPrice: {
+                            type: 'input',
+                            value: '',
+                            label: '最高总价'
+                        },
+                        minArea: {
+                            type: 'input',
+                            value: '',
+                            label: '最小面积'
+                        },
+                        maxArea: {
+                            type: 'input',
+                            value: '',
+                            label: '最大面积'
+                        },
+                        decoration: {
+                            type: 'select',
+                            value: '',
+                            label: '装修',
+                            options: [
+                                {
+                                    label: '毛坯',
+                                    value: 'NONE'
+                                },
+                                {
+                                    label: '简装',
+                                    value: 'SIMPLE'
+                                },
+                                {
+                                    label: '中装',
+                                    value: 'CENTER'
+                                },
+                                {
+                                    label: '豪装',
+                                    value: 'RSZ'
+                                },
+                                {
+                                    label: '精装',
+                                    value: 'JZ'
+                                },
+                                {
+                                    label: '清水',
+                                    value: 'QS'
+                                },
+                                {
+                                    label: '准新房',
+                                    value: 'ZXF'
+                                },
+                                {
+                                    label: '装修不限',
+                                    value: 'ALL'
+                                }
+                            ]
+                        },
+                        purpose: {
+                            type: 'select',
+                            value: '',
+                            label: '用途',
+                            options: [
+                                {
+                                    label: '住宅',
+                                    value: 'RESIDENCE'
+                                },
+                                {
+                                    label: '厂房',
+                                    value: 'CF'
+                                },
+                                {
+                                    label: '写字楼',
+                                    value: 'XZL'
+                                },
+                                {
+                                    label: '公寓',
+                                    value: 'CROCS'
+                                },
+                                {
+                                    label: '商铺',
+                                    value: 'SHANGPU'
+                                },
+                                {
+                                    label: '别墅',
+                                    value: 'BIESHU'
+                                },
+                                {
+                                    label: '仓库',
+                                    value: 'CK'
+                                }
+                            ]
+                        }
+                    },
+                }
             }
         },
         beforeMount() {
@@ -352,10 +415,12 @@
             this.getFollow(id);
         },
         methods: {
+            /*获取详情*/
             async getDetail(id) {
                 let res = await ApiMethods.ClientApi.detail({id: id});
                 if (res.code == 200 && res.data) {
                     this.detailInfo = res.data;
+                    this.syncModifyModel(res.data)
                     if (this.detailInfo.entering) {
                         this.detailInfo.entering.label = '责任人'
                         this.personInfo.push(this.detailInfo.entering)
@@ -366,12 +431,14 @@
                     }
                 }
             },
+            /*获取跟进信息*/
             async getFollow(id) {
                 let res = await ApiMethods.ClientApi.follers({id: id});
                 if (res.code == 200 && res.data) {
                     this.followInfo.push(res.data.content);
                 }
             },
+            /*收藏*/
             async collect() {
                 if (!this.$route.query) {
                     this.$message({
@@ -429,7 +496,18 @@
                     });
                 }
             },
-            doModify(){
+            syncModifyModel(data) {
+                Object.keys(this.modifyModel).forEach(t => {
+                    if (data.hasOwnProperty(t)) {
+                        if (typeof data[t] === 'string') {
+                            this.modifyModel[t].value = data[t]
+                        } else if (data[t] instanceof Array) {
+                            this.modifyModel[t].value = this.valueFromArray(data[t], 'divideId', ',')
+                        }
+                    }
+                })
+            },
+            doModify() {
                 console.log(this.modifyModel);
             },
             closeAddFollow() {
@@ -453,10 +531,17 @@
                     return '不限'
                 }
             },
+            /**
+             *
+             * @param array 原始数组
+             * @param key 键
+             * @param join 分隔符
+             * @returns {string}
+             */
             valueFromArray(array, key, join) {
                 let res = [];
                 array.forEach(t => {
-                    if(t[key]){
+                    if (t[key]) {
                         res.push(t[key]);
                     }
                 });
@@ -487,30 +572,6 @@
                     tags.push({label: `${this.detailInfo.status}`, type: 'success'})
                 }
                 return tags;
-            },
-            modifyModel() {
-                return {
-                    clientType: {
-                        type: 'input',
-                        value: this.detailInfo.clientType,
-                        label: '客源类型'
-                    },
-                    source: {
-                        type: 'input',
-                        value: this.detailInfo.source,
-                        label: '客户来源'
-                    },
-                    account: {
-                        type: 'input',
-                        value: this.detailInfo.account,
-                        label: '户口信息'
-                    },
-                    needAddressDtos:{
-                        type: 'input',
-                        value: this.detailInfo.needAddressDtos ? this.valueFromArray(this.detailInfo.needAddressDtos,'divideId',',') : '',
-                        label: '需求位置'
-                    },
-                }
             },
         }
     }

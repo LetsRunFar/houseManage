@@ -20,7 +20,6 @@ export const newErshoufangModel = {
         region: {
             label: '小区',
             type: 'cascader',
-            width: '240px',
             value: [],
             rules: [{required: true, message: '请选择'}],
             options: [{
@@ -191,27 +190,27 @@ export const newErshoufangModel = {
                     placeholder: '室',
                     rules: [{required: true, message: '请输入室数'}],
                     model: 'room',
-                    width: '14%'
+                    width: '20%'
                 }, {
                     type: 'input',
                     placeholder: '厅',
                     model: 'hall',
-                    width: '14%'
+                    width: '20%'
                 }, {
                     type: 'input',
                     placeholder: '卫',
                     model: 'toilet',
-                    width: '14%'
+                    width: '20%'
                 }, {
                     type: 'input',
                     placeholder: '厨',
                     model: 'kitchen',
-                    width: '14%'
+                    width: '20%'
                 }, {
                     type: 'input',
                     placeholder: '阳台',
                     model: 'balcony',
-                    width: '14%'
+                    width: '20%'
                 }
             ],
         },
@@ -436,9 +435,7 @@ export const newErshoufangModel = {
                     value: '3'
                 },
             ]
-        }
-    },
-    attachInfo: {
+        },
         ownerAttitude: {
             label: '业主态度',
             type: 'select',
@@ -539,7 +536,7 @@ export const newErshoufangModel = {
             rules: [{required: true, message: '请输入看房时间'}],
             value: ''
         }
-    }
+    },
 }
 
 export const newClientModel = {
@@ -693,7 +690,6 @@ export const newClientModel = {
         needAddressDtos: {
             label: '需求位置',
             type: 'cascader',
-            width: '240px',
             value: [],
             rules: [{required: true, message: '请选择需求位置'}],
             options: [{
@@ -728,8 +724,6 @@ export const newClientModel = {
                 }]
             }]
         },
-    },
-    attachInfo: {
         minTotalPrice: {
             label: '最低总价',
             type: 'input',
@@ -1030,7 +1024,6 @@ export const newClientRentModel = {
         needAddressDtos: {
             label: '需求位置',
             type: 'cascader',
-            width: '240px',
             value: [],
             rules: [{required: true, message: '请选择需求位置'}],
             options: [{
@@ -1065,8 +1058,6 @@ export const newClientRentModel = {
                 }]
             }]
         },
-    },
-    attachInfo: {
         minMonth: {
             label: '最小月租金',
             type: 'input',
@@ -1641,7 +1632,6 @@ export const newYishoufangModel = {
         region: {
             label: '小区',
             type: 'cascader',
-            width: '240px',
             value: [],
             rules: [{required: true, message: '请选择'}],
             options: [{
@@ -1812,27 +1802,27 @@ export const newYishoufangModel = {
                     placeholder: '室',
                     rules: [{required: true, message: '请输入室数'}],
                     model: 'room',
-                    width: '14%'
+                    width: '20%'
                 }, {
                     type: 'input',
                     placeholder: '厅',
                     model: 'hall',
-                    width: '14%'
+                    width: '20%'
                 }, {
                     type: 'input',
                     placeholder: '卫',
                     model: 'toilet',
-                    width: '14%'
+                    width: '20%'
                 }, {
                     type: 'input',
                     placeholder: '厨',
                     model: 'kitchen',
-                    width: '14%'
+                    width: '20%'
                 }, {
                     type: 'input',
                     placeholder: '阳台',
                     model: 'balcony',
-                    width: '14%'
+                    width: '20%'
                 }
             ],
         },
