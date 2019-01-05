@@ -107,7 +107,6 @@
             doValidate() {
                 return new Promise((resolve, reject) => {
                     this.$refs.multiForm.validate(valid => {
-
                         if (valid) {
                             resolve();
                         } else {

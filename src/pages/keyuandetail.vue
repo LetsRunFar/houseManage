@@ -310,102 +310,147 @@
                         value: '',
                         label: '需求位置'
                     },
-                    buyNeeds: {
-                        minTotalPrice: {
-                            type: 'input',
-                            value: '',
-                            label: '最低总价'
-                        },
-                        maxTotalPrice: {
-                            type: 'input',
-                            value: '',
-                            label: '最高总价'
-                        },
-                        minArea: {
-                            type: 'input',
-                            value: '',
-                            label: '最小面积'
-                        },
-                        maxArea: {
-                            type: 'input',
-                            value: '',
-                            label: '最大面积'
-                        },
-                        decoration: {
-                            type: 'select',
-                            value: '',
-                            label: '装修',
-                            options: [
-                                {
-                                    label: '毛坯',
-                                    value: 'NONE'
-                                },
-                                {
-                                    label: '简装',
-                                    value: 'SIMPLE'
-                                },
-                                {
-                                    label: '中装',
-                                    value: 'CENTER'
-                                },
-                                {
-                                    label: '豪装',
-                                    value: 'RSZ'
-                                },
-                                {
-                                    label: '精装',
-                                    value: 'JZ'
-                                },
-                                {
-                                    label: '清水',
-                                    value: 'QS'
-                                },
-                                {
-                                    label: '准新房',
-                                    value: 'ZXF'
-                                },
-                                {
-                                    label: '装修不限',
-                                    value: 'ALL'
-                                }
-                            ]
-                        },
-                        purpose: {
-                            type: 'select',
-                            value: '',
-                            label: '用途',
-                            options: [
-                                {
-                                    label: '住宅',
-                                    value: 'RESIDENCE'
-                                },
-                                {
-                                    label: '厂房',
-                                    value: 'CF'
-                                },
-                                {
-                                    label: '写字楼',
-                                    value: 'XZL'
-                                },
-                                {
-                                    label: '公寓',
-                                    value: 'CROCS'
-                                },
-                                {
-                                    label: '商铺',
-                                    value: 'SHANGPU'
-                                },
-                                {
-                                    label: '别墅',
-                                    value: 'BIESHU'
-                                },
-                                {
-                                    label: '仓库',
-                                    value: 'CK'
-                                }
-                            ]
-                        }
+                    minTotalPrice: {
+                        type: 'input',
+                        value: '',
+                        label: '最低总价'
                     },
+                    maxTotalPrice: {
+                        type: 'input',
+                        value: '',
+                        label: '最高总价'
+                    },
+                    minArea: {
+                        type: 'input',
+                        value: '',
+                        label: '最小面积'
+                    },
+                    maxArea: {
+                        type: 'input',
+                        value: '',
+                        label: '最大面积'
+                    },
+                    decoration: {
+                        type: 'select',
+                        value: '',
+                        label: '装修',
+                        options: [
+                            {
+                                label: '毛坯',
+                                value: 'NONE'
+                            },
+                            {
+                                label: '简装',
+                                value: 'SIMPLE'
+                            },
+                            {
+                                label: '中装',
+                                value: 'CENTER'
+                            },
+                            {
+                                label: '豪装',
+                                value: 'RSZ'
+                            },
+                            {
+                                label: '精装',
+                                value: 'JZ'
+                            },
+                            {
+                                label: '清水',
+                                value: 'QS'
+                            },
+                            {
+                                label: '准新房',
+                                value: 'ZXF'
+                            },
+                            {
+                                label: '装修不限',
+                                value: 'ALL'
+                            }
+                        ]
+                    },
+                    purpose: {
+                        type: 'select',
+                        value: '',
+                        label: '用途',
+                        options: [
+                            {
+                                label: '住宅',
+                                value: 'RESIDENCE'
+                            },
+                            {
+                                label: '厂房',
+                                value: 'CF'
+                            },
+                            {
+                                label: '写字楼',
+                                value: 'XZL'
+                            },
+                            {
+                                label: '公寓',
+                                value: 'CROCS'
+                            },
+                            {
+                                label: '商铺',
+                                value: 'SHANGPU'
+                            },
+                            {
+                                label: '别墅',
+                                value: 'BIESHU'
+                            },
+                            {
+                                label: '仓库',
+                                value: 'CK'
+                            }
+                        ]
+                    },
+                    unit: {
+                        type: 'input',
+                        label: '室数',
+                        value: ''
+                    },
+                    hall: {
+                        type: 'input',
+                        label: '厅数',
+                        value: ''
+                    },
+                    payWay: {
+                        type: 'select',
+                        label: '付款方式',
+                        value: '',
+                        options: [
+                            {
+                                label: '分期',
+                                value: 'FQ'
+                            },
+                            {
+                                label: '公积金',
+                                value: 'THELOAN'
+                            },
+                            {
+                                label: '全款',
+                                value: 'BIGBANG'
+                            },
+                            {
+                                label: '商贷',
+                                value: 'SD'
+                            },
+                            {
+                                label: '其他',
+                                value: 'QT'
+                            }
+                        ]
+                    },
+                    minMonth: {
+                        type: 'input',
+                        value: '',
+                        label: '最小月租金'
+                    },
+                    maxArea: {
+                        type: 'input',
+                        value: '',
+                        label: '最大月租金'
+                    }
                 }
             }
         },
@@ -497,13 +542,18 @@
                 }
             },
             syncModifyModel(data) {
-                Object.keys(this.modifyModel).forEach(t => {
-                    if (data.hasOwnProperty(t)) {
-                        if (typeof data[t] === 'string') {
+                Object.keys(data).forEach(t => {
+                    if (typeof data[t] === 'string' || typeof data[t] === 'number') {
+                        //基本数据，直接赋值
+                        if (this.modifyModel.hasOwnProperty(t)) {
                             this.modifyModel[t].value = data[t]
-                        } else if (data[t] instanceof Array) {
-                            this.modifyModel[t].value = this.valueFromArray(data[t], 'divideId', ',')
                         }
+                    } else if (data[t] instanceof Array) {
+                        //数组，转换为“，”分割的字符串
+                        this.modifyModel[t].value = this.valueFromArray(data[t], 'divideId', ',')
+                    } else if (data[t] instanceof Object) {
+                        //对象，递归
+                        this.syncModifyModel(data[t])
                     }
                 })
             },
@@ -550,6 +600,12 @@
         },
         watch: {
             addFollowInfo: {
+                handler(val) {
+                    console.log(val);
+                },
+                deep: true
+            },
+            modifyModel: {
                 handler(val) {
                     console.log(val);
                 },

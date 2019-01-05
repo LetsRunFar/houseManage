@@ -1,3 +1,35 @@
+const OPTIONS = {
+    purpose: [
+        {
+            label: '住宅',
+            value: 'RESIDENCE'
+        },
+        {
+            label: '厂房',
+            value: 'CF'
+        },
+        {
+            label: '写字楼',
+            value: 'XZL'
+        },
+        {
+            label: '公寓',
+            value: 'CROCS'
+        },
+        {
+            label: '商铺',
+            value: 'SHANGPU'
+        },
+        {
+            label: '别墅',
+            value: 'BIESHU'
+        },
+        {
+            label: '仓库',
+            value: 'CK'
+        }
+    ]
+}
 export const newErshoufangModel = {
     firstStepInfo: {
         tradeType: {
@@ -2150,6 +2182,85 @@ export const newYishoufangModel = {
             rules: [{required: true, message: '请输入看房时间'}],
             value: ''
         }
+    }
+}
+
+export const newShapeModel = {
+    quantity: {
+        type: 'input',
+        label: '户型数量',
+        value: ''
+    },
+    purpose: {
+        type: 'select',
+        label: '用途',
+        value: '',
+        options: OPTIONS.purpose
+    },
+    area: {
+        type: 'input',
+        value: '',
+        label: '面积'
+    },
+    buildingArea: {
+        type: 'input',
+        value: '',
+        label: '建筑面积'
+    },
+    averagePrice: {
+        type: 'input',
+        value: '',
+        label: '均价'
+    },
+    totalPrice: {
+        type: 'input',
+        value: '',
+        label: '总价'
+    },
+    direction: {
+        type: 'input',
+        value: '',
+        label: '朝向'
+    },
+    structure: {
+        type: 'input',
+        value: '',
+        label: '户型结构'
+    },
+    remark: {
+        type: 'input',
+        value: '',
+        label: '备注'
+    },
+    features: {
+        type: 'input',
+        value: '',
+        label: '户型说明'
+    },
+    room: {
+        type: 'input',
+        value: '',
+        label: '室数'
+    },
+    hall: {
+        type: 'input',
+        value: '',
+        label: '厅数'
+    },
+    toilet: {
+        type: 'input',
+        value: '',
+        label: '卫生间数'
+    },
+    balcony: {
+        type: 'input',
+        value: '',
+        label: '阳台数'
+    },
+    kitchen: {
+        type: 'input',
+        value: '',
+        label: '厨房数'
     }
 }
 

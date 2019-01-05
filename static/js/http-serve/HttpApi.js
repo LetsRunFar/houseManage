@@ -85,15 +85,21 @@ export const getRequest = (url) => {
 export const ApiMethods = {
     ErshoufangApi: {
         queryAll: () => {
-            return getRequest(globalDomain.api + 'gycGS9Nc9e13b9ecd9991b65d693d55a45ee44094b05162?uri=house/esfs')
+            return getRequest(globalDomain.api + 'gycGS9Nc9e13b9ecd9991b65d693d55a45ee44094b05162?uri=http://localhost:8080/house/esfs')
         }
     },
     YishoufangApi: {
         queryAll: () => {
-            return getRequest(globalDomain.api + 'gycGS9Nc9e13b9ecd9991b65d693d55a45ee44094b05162?uri=/house/loupans')
+            return getRequest(globalDomain.api + 'gycGS9Nc9e13b9ecd9991b65d693d55a45ee44094b05162?uri=http://localhost:8080/house/loupans')
         },
         detail: ({id}) => {
-            return getRequest(globalDomain.api + 'gycGS9Nc9e13b9ecd9991b65d693d55a45ee44094b05162?uri=/house/loupans/' + id)
+            return getRequest(globalDomain.api + 'gycGS9Nc9e13b9ecd9991b65d693d55a45ee44094b05162?uri=http://localhost:8080/house/loupans/' + id)
+        },
+        shapes: ({id}) => {
+            return getRequest(globalDomain.api + `gycGS9Nc9e13b9ecd9991b65d693d55a45ee44094b05162?uri=http://localhost:8080/house/loupans/${id}/shape`)
+        },
+        getShape: ({loupanId,shapeId}) => {
+            return getRequest(globalDomain.api + `gycGS9Nc9e13b9ecd9991b65d693d55a45ee44094b05162?uri=http://localhost:8080/house/loupans/${loupanId}/shape/${shapeId}`)
         }
     },
     ClientApi: {
